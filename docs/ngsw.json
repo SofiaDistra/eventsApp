@@ -1,0 +1,85 @@
+{
+  "configVersion": 1,
+  "timestamp": 1625742281556,
+  "index": "/eventsApp/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/eventsApp/favicon.ico",
+        "/eventsApp/index.html",
+        "/eventsApp/main.a0ad8577cbe92caf0890.js",
+        "/eventsApp/manifest.webmanifest",
+        "/eventsApp/polyfills.2520810eb86ec0bb3ff6.js",
+        "/eventsApp/runtime.71fede4aab4b30f365c7.js",
+        "/eventsApp/scripts.ef6f80efe636f0dc694b.js",
+        "/eventsApp/styles.175becff45a0f4a47fa2.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/eventsApp/assets/icons/icon-128x128.png",
+        "/eventsApp/assets/icons/icon-144x144.png",
+        "/eventsApp/assets/icons/icon-152x152.png",
+        "/eventsApp/assets/icons/icon-192x192.png",
+        "/eventsApp/assets/icons/icon-384x384.png",
+        "/eventsApp/assets/icons/icon-512x512.png",
+        "/eventsApp/assets/icons/icon-72x72.png",
+        "/eventsApp/assets/icons/icon-96x96.png",
+        "/eventsApp/assets/images/theatre.jpeg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/eventsApp/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/eventsApp/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/eventsApp/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/eventsApp/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/eventsApp/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/eventsApp/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/eventsApp/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/eventsApp/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/eventsApp/assets/images/theatre.jpeg": "c510b56845f630d9a84ab1691fa2869ce1264b98",
+    "/eventsApp/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/eventsApp/index.html": "774a20c46d281e0a3d416c5db6b8f28b8d5db2a8",
+    "/eventsApp/main.a0ad8577cbe92caf0890.js": "ead1f9bf1ad7181d82a3235c55a7fbc13bfd662c",
+    "/eventsApp/manifest.webmanifest": "8a0f0b68b626156e1cd29754747709d0d6f87ae3",
+    "/eventsApp/polyfills.2520810eb86ec0bb3ff6.js": "f3e5b02a99ac147be47e591dae59708d57755b6b",
+    "/eventsApp/runtime.71fede4aab4b30f365c7.js": "ae4d01c7c9b0e1a68f29f20e8075ab87c1141d12",
+    "/eventsApp/scripts.ef6f80efe636f0dc694b.js": "82db4e3e9e19c6710df65da32f5cd53f1b1f6ad9",
+    "/eventsApp/styles.175becff45a0f4a47fa2.css": "cc53594828290b995f210c6d62d4eb8b3eec4d03"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
