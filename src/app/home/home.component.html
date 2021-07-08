@@ -1,0 +1,299 @@
+<header>{{name}}, Welcome to your Events Journal</header>
+<section class="calendar">
+  <div class="border square align-content-center">
+    <div class="row text-center">
+      <div class="col-12 text-primary">
+        <h3>{{this.todayDay}}</h3>
+      </div>
+      <div class="col-12 text-primary">
+        <p class="display-1">{{this.todayNumber}}</p>
+      </div>
+      <div class="col-12 text-primary">
+        <h3>{{this.todayMonth}} {{this.todayYear}}</h3>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="counts">
+  <div class="container-fluid">
+    <div class="row">
+      <h1 class="text-primary">Most Recently Watched</h1>
+      <div class="col-sm">
+        <div *ngIf="this.data.length!=0" id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button *ngFor="let item of this.mostRecent; let i=index"  type="button" data-bs-target="#carouselExampleCaptions" attr.data-bs-slide-to="{{i}}"
+                    [className]="i==0 ? 'active' : ''"></button>
+          </div>
+          <div class="carousel-inner">
+            <div *ngFor="let item of this.mostRecent; let j=index" [className]="j==0 ? 'carousel-item active' : 'carousel-item'">
+              <img *ngIf="item.imageStr!=null" class="img-thumbnail" [src]="item.imageStr" class="d-block w-100" alt="image placeholder">
+              <img *ngIf="item.imageStr==null" class="img-thumbnail" src="/assets/images/theatre.jpeg" class="d-block w-100" alt="image placeholder">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>{{item.title}}</h5>
+                <p>{{item.comments}}</p>
+                <p>Rating : {{item.rating}}</p>
+                <button type="button" class="btn btn-secondary" (click)="openModal('detailsModal',j, true)">Details</button>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        <div *ngIf="this.data.length==0">
+          No data yet. Add events to show carousel.
+        </div>
+      </div>
+      <div class="col-sm">
+        <h3 class="text-primary">New Event</h3>
+        <form>
+          <div class="row mb-3">
+            <label for="titleInput" class="col-sm-3 col-form-label">Title</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="titleInput" name="title" [(ngModel)]="newEvent.title">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="dateWatched" class="col-sm-3 col-form-label">Date Watched</label>
+            <div class="col-sm-9">
+              <input type="date" class="form-control" id="dateWatched" name="date" [max]="maxDateStr" [(ngModel)]="newEvent.date">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="location" class="col-sm-3 col-form-label">Location</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="location" name="location" [(ngModel)]="newEvent.location">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="comments" class="col-sm-3 col-form-label">Comments</label>
+            <div class="col-sm-9">
+              <textarea class="form-control" id="comments" name="comments" [(ngModel)]="newEvent.comments"></textarea>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="picture" class="col-sm-3 col-form-label">Picture</label>
+            <div class="col-sm-9">
+              <input required type="file" class="form-control" id="picture" name="picture" (change)="onFileChanged($event)" >
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="eventType" class="col-sm-3 col-form-label">Event Type</label>
+            <div class="col-sm-9">
+              <select id="eventType"class="form-control form-select" name="type" [(ngModel)]="newEvent.type">
+                <option value="" disabled selected>Select type</option>
+                <option value="theatre">Theatre</option>
+                <option value="movie">Movie</option>
+                <option value="concert">Concert</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="rating" class="col-sm-3 col-form-label">Rating</label>
+            <div class="col-sm-9">
+              <select id="rating" class="form-select form-control-sm" name="rating" [(ngModel)]="newEvent.rating">
+                <option value="" disabled selected>Select rating</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary float-end" (click)="saveEvent()">Add</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm m-3 p-2 border border-2 border-primary text-center">
+        <h4>Favorite Event Type:</h4>
+        <p class="stencil-font-bold text-primary">{{favType}}</p>
+      </div>
+      <div class="col-sm m-3 p-2 border border-2 border-primary text-center">
+        <h4>Most Visited Location:</h4>
+        <p class="stencil-font-bold text-primary">{{favLocation}}</p>
+      </div>
+      <div class="col-sm m-3 p-2 border border-2 border-primary text-center">
+        <h4>Top Rated Events No:</h4>
+        <p class="stencil-font-bold text-primary">{{noTopRated}}</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+<section class="table">
+  <h2 class="text-center">All your events</h2>
+  <div class="text-center" id="select_cols">
+    <li><input type="checkbox" [(ngModel)]="this.colsShow[0]" checked="true" value="hide">
+      Type
+    </li>
+    <li><input type="checkbox" [(ngModel)]="this.colsShow[1]" checked="true" value="hide">
+      Title</li>
+    <li><input type="checkbox" [(ngModel)]="this.colsShow[2]" checked="true" value="hide">
+      Date</li>
+    <li><input type="checkbox" [(ngModel)]="this.colsShow[3]" checked="true" value="hide">
+      Location</li>
+    <li><input type="checkbox" [(ngModel)]="this.colsShow[4]" checked="true" value="hide">
+      Rating</li>
+
+  </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th id="result_col_head" *ngIf="this.colsShow[0]" (click)="sort('type')">Type<i class="fa fa-fw fa-sort"></i></th>
+      <th id="year_col_head" *ngIf="this.colsShow[1]" (click)="sort('title')">Title<i class="fa fa-fw fa-sort"></i></th>
+      <th id="tourn_col_head" *ngIf="this.colsShow[2]" (click)="sort('date')">Date<i class="fa fa-fw fa-sort"></i></th>
+      <th id="opon_col_head" *ngIf="this.colsShow[3]" (click)="sort('location')">Location<i class="fa fa-fw fa-sort"></i></th>
+      <th id="score_col_head" *ngIf="this.colsShow[4]" (click)="sort('rating')">Rating<i class="fa fa-fw fa-sort"></i></th>
+      <th id="edit_col_head">Edit</th>
+    </tr>
+    </thead>
+    <thead>
+    <tr>
+      <th *ngIf="this.colsShow[0]"><input type="text" class="form-control" placeholder="Filter type" [(ngModel)]="typeFilter"
+                                          (input)="filterValueChanged()"></th>
+      <th *ngIf="this.colsShow[1]"><input type="text" class="form-control" placeholder="Filter title" [(ngModel)]="titleFilter"
+                                          (input)="filterValueChanged()"></th>
+      <th *ngIf="this.colsShow[2]"><input type="text" class="form-control" placeholder="Filter date" [(ngModel)]="dateFilter"
+                                          (input)="filterValueChanged()"></th>
+      <th *ngIf="this.colsShow[3]"><input type="text" class="form-control" placeholder="Filter location" [(ngModel)]="locationFilter"
+                                          (input)="filterValueChanged()"></th>
+      <th *ngIf="this.colsShow[4]"><input type="text" class="form-control" placeholder="Filter rating" [(ngModel)]="ratingFilter"
+                                          (input)="filterValueChanged()"></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of this.data; let i=index;">
+      <td *ngIf="this.colsShow[0]">{{item.type}}</td>
+      <td *ngIf="this.colsShow[1]">{{item.title}}</td>
+      <td *ngIf="this.colsShow[2]">{{item.date | date:'longDate'}}</td>
+      <td *ngIf="this.colsShow[3]">{{item.location}}</td>
+      <td *ngIf="this.colsShow[4]">{{item.rating}}</td>
+      <td><button class="btn btn-primary btn-sm" (click)="openModal('editModal',i,false)">edit</button></td>
+    </tr>
+    </tbody>
+
+  </table>
+
+</section>
+
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header red-bg">
+        <h5 class="modal-title stencil-font-bold text-primary">{{modalEvent.title}}</h5>
+        <button type="button" class="close" (click)="closeModal('detailsModal')" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row mb-3">
+            <label class="col-sm-3 col-form-label text-primary">Watched on:</label>
+            <div class="col-sm-9">
+              <label class="col-form-label">{{modalEvent.date | date : 'longDate'}}</label>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-3 col-form-label text-primary">Comments:</label>
+            <div class="col-sm-9">
+              <label class="col-form-label">{{modalEvent.comments}}</label>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-3 col-form-label text-primary">Type:</label>
+            <div class="col-sm-9">
+              <label class="col-form-label">{{modalEvent.type}}</label>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-3 col-form-label text-primary">Rating:</label>
+            <div class="col-sm-9">
+              <label class="col-form-label">{{modalEvent.rating}}</label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header red-bg">
+        <h5 class="modal-title stencil-font-bold text-primary">{{modalEvent.title}}</h5>
+        <button type="button" class="close" (click)="closeModal('editModal')" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row mb-3">
+            <label class="col-sm-3 col-form-label text-primary">Title:</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="title" [(ngModel)]="modalEvent.title">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-3 col-form-label text-primary">Watched on:</label>
+            <div class="col-sm-9">
+              <input type="date" class="form-control" name="date" [max]="maxDateStr" [(ngModel)]="modalEvent.date">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-3 col-form-label text-primary">Location</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="location" [(ngModel)]="modalEvent.location">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-3 col-form-label text-primary">Comments:</label>
+            <div class="col-sm-9">
+              <textarea class="form-control" name="comments" [(ngModel)]="modalEvent.comments"></textarea>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-3 col-form-label text-primary">Type:</label>
+            <div class="col-sm-9">
+              <select name="type" class="form-control form-select"[(ngModel)]="modalEvent.type">
+                <option value="theatre" [selected]="modalEvent.type=='theatre' ? true : false">Theatre</option>
+                <option value="movie" [selected]="modalEvent.type=='movie' ? true : false">Movie</option>
+                <option value="concert" [selected]="modalEvent.type=='concert' ? true : false">Concert</option>
+                <option value="other" [selected]="modalEvent.type=='other' ? true : false">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-3 col-form-label text-primary">Rating:</label>
+            <div class="col-sm-9">
+              <select class="form-select form-control-sm" name="rating" [(ngModel)]="modalEvent.rating">
+                <option value="1" [selected]="modalEvent.rating==1 ? true : false">1</option>
+                <option value="2" [selected]="modalEvent.rating==2 ? true : false">2</option>
+                <option value="3" [selected]="modalEvent.rating==3 ? true : false">3</option>
+                <option value="4" [selected]="modalEvent.rating==4 ? true : false">4</option>
+                <option value="5" [selected]="modalEvent.rating==5 ? true : false">5</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="saveEditedEvent()">Save changes</button>
+        <button type="button" class="btn btn-secondary" (click)="deleteEvent()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

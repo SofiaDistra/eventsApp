@@ -1,1 +1,111 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@100;300;400;500;600;700;800;900&display=swap');
+
+header {
+  padding: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Big Shoulders Stencil Display', cursive;
+  font-weight: bold;
+  font-size: 200%;
+  border-bottom: solid 3px #ff4d4d;
+}
+
+main {
+  margin: 10px;
+}
+
+footer {
+  padding: 10px;
+  text-align: center;
+  color: #ff4d4d;
+}
+
+header           { background-color: white; color:#ff4d4d; grid-area: head; }
+section.calendar { background-color: white; color:#ff4d4d; grid-area: caln; }
+section.counts   { background-color: white; color:#ff4d4d; grid-area: cnts; }
+section.table    { background-color: white; color:#ff4d4d; grid-area: tabl; }
+section.stats    { background-color: white; color:#ff4d4d; grid-area: stat; }
+main             { background-color: white; color:#ff4d4d; grid-area: main; }
+footer           {                                         grid-area: foot; }
+
+th {
+  background-color: #ff4d4d !important;
+  color: white !important;
+}
+
+tr {
+  color: #ff4d4d !important;
+}
+
+tr:hover {
+  background-color: #0d6efd !important;
+  color: white !important;
+}
+
+#select_cols li {
+  display:inline-block;
+  margin:5px;
+}
+
+@media (max-width: 300px) {
+
+  body {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "head"
+        "caln"
+        "cnts"
+        "stat"
+        "tabl"
+        "foot";
+  }
+}
+
+@media all and (min-width: 600px) {
+  body {
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas:
+            "head head"
+            "caln caln"
+            "cnts cnts"
+            "stat stat"
+            "tabl tabl"
+            "foot foot";
+  }
+}
+
+@media all and (min-width: 800px) {
+  body {
+    grid-template-columns: 3fr 2fr 2fr;
+    grid-template-areas:
+            "head head head"
+            "caln cnts cnts"
+            "stat stat stat"
+            "tabl tabl tabl"
+            "foot foot foot";
+  }
+}
+
+.square {
+  margin: 10px;
+  background: #ff4d4d;
+  color: white;
+  font-family: 'Big Shoulders Stencil Display', cursive;
+}
+
+.stencil-font-bold {
+  font-family: 'Big Shoulders Stencil Display', cursive;
+  font-weight: bold;
+  font-size: large;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.red-bg {
+  background-color: #ff4d4d;
+}
+
+
