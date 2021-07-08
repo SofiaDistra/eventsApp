@@ -14,7 +14,7 @@ export class SetupComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    if (localStorage.getItem('init') != null) {
+    if (localStorage.getItem('initJournal') != null) {
       // redirect to main
       this.router.navigate(['/home']);
     }
@@ -23,7 +23,7 @@ export class SetupComponent implements OnInit {
   submit() {
     localStorage.setItem('city', this.city);
     localStorage.setItem('name', this.name);
-    localStorage.setItem('init', 'true');
+    localStorage.setItem('initJournal', 'true');
     this.router.navigate(['/home']);
   }
 

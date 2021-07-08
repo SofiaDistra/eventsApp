@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1625757954687,
+  "timestamp": 1625758193634,
   "index": "/eventsApp/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/eventsApp/favicon.ico",
         "/eventsApp/index.html",
-        "/eventsApp/main.a0ad8577cbe92caf0890.js",
+        "/eventsApp/main.7653d6798dd2d3c2fe0d.js",
         "/eventsApp/manifest.webmanifest",
         "/eventsApp/polyfills.2520810eb86ec0bb3ff6.js",
         "/eventsApp/runtime.71fede4aab4b30f365c7.js",
@@ -55,8 +55,8 @@
     "/eventsApp/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/eventsApp/assets/images/theatre.jpeg": "c510b56845f630d9a84ab1691fa2869ce1264b98",
     "/eventsApp/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/eventsApp/index.html": "774a20c46d281e0a3d416c5db6b8f28b8d5db2a8",
-    "/eventsApp/main.a0ad8577cbe92caf0890.js": "ead1f9bf1ad7181d82a3235c55a7fbc13bfd662c",
+    "/eventsApp/index.html": "73a0172ed05eed224303e54f1940f86b37c88a36",
+    "/eventsApp/main.7653d6798dd2d3c2fe0d.js": "8622ee3e51f60511a5885442eb18b0273a5519df",
     "/eventsApp/manifest.webmanifest": "8a0f0b68b626156e1cd29754747709d0d6f87ae3",
     "/eventsApp/polyfills.2520810eb86ec0bb3ff6.js": "f3e5b02a99ac147be47e591dae59708d57755b6b",
     "/eventsApp/runtime.71fede4aab4b30f365c7.js": "ae4d01c7c9b0e1a68f29f20e8075ab87c1141d12",
